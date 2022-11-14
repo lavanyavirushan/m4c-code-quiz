@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>CODE QUIZ</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Trirong"
+    />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css?family=Sofia"
+    />
+    <link rel=""stylesheet type="text/css" href="./assets/css/reset.css">
+    <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
+  </head>
+
+  <body>
+    <!-- Stores Highscore and displays countdown timer -->
+    <header>
+      <div class="view-high-score" href="#high-score">View high score</div>
+      <div class="timer-countdown">Time: 0</div>
+    </header>
+
+    <main>
+      <!-- Instruction page to start quiz -->
+      <section id="intro-page">
+        <h1 class="titles">Coding Quiz Challenge</h1>
+        <p class="instructions">
+          Try to answer the following code-related questions within the time
+          limit. Keep in mind that incorrect answers will penalize your
+          score/time by ten seconds!
+        </p>
+        <button class="button" id="start-btn">Start Quiz</button>
+      </section>
+
+      <!-- Quiz Questions and options -->
+      <section id="quiz-questions">
+        <div class="titles">
+          <h1 class="titles">Commonly used data types DO NOT include:</h1>
+        </div>
+        <div class="options">
+          <ol>
+            <li><button class="button" id="answer-1">Strings</button></li>
+            <li><button class="button" id="answer-2">Booleans</button></li>
+            <li><button class="button" id="answer-3">Alerts</button></li>
+            <li><button class="button" id="answer-4">Numbers</button></li>
+          </ol>
+        </div>
+        <!-- Check if answer is correct or wrong -->
+        <div class="answer-check">
+          <p>Correct or Wrong</p>
+        </div>
+      </section>
+
+      <!-- Results container -->
+      <section id="result">
+        <h1 class="titles">All Done!</h1>
+        <p clss="display-final-score">Your final score is:</p>
+        <div class="input-initials">
+            <label for="initials">Enter initials:<label>
+            <input type="text" name="initials" id="initials"/>
+            <button class="button" id="submit-btn">Submit</button>
+        </div>
+      </section>
+
+      <!-- Display high score  -->
+      <section id="high-score">
+        <h1 class="titles">High Score</h1>
+        <p><span id="saved-initial-score"></span></p>
+        <button class= "button" id="back-btn">Go Back</button>
+        <button class= "button" id="clear-btn">Clear high score</button>
+      </section>
+    </main>
+
+    <script src="./assets/js/script.js"></script>
+  </body>
+</html>
