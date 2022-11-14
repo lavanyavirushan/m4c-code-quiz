@@ -3,9 +3,9 @@
     --font-family: "Trirong", sans-serif;
 
     /* purple color */
-    --primary-color: 128,0,128;
+    --primary-color: rgb(128,0,128);
     /* highlighted color */
-    --secondery-color: 255,182,193;
+    --secondary-color: rgb(255,182,193);
     --black: 0, 0, 0;
 
     --font-extra-small: 8px;
