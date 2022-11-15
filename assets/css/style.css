@@ -115,23 +115,35 @@ header {
 }
 
 @media (max-width: 680px) {
+    header {
+        width: 100%;
+        margin-top: 20px;
+        margin-left: 0;
+
+    }
+
+    .view-high-score {
+        display: inline;
+    }
+    
+    .timer-countdown {
+        margin-top: 5px;
+    }
+
     #intro-page, #quiz-questions, #result, #high-score{
-        width: 450px;
+        width: 100%;
     }
 }
 
 @media (max-width:1024px) {
-    header {
+    header, .instructions, .display-final-score, .input-initials, .saved-initial-score {
         font-size: var(--font-large);
-    }
-    #intro-page, #quiz-questions, #result, #high-score{
-        font-size: var(--font-large);
-    }
-    .instructions {
-       font-size:var(--font-large);
     }
     .button {
         font-size:var(--font-large);
+        padding: 5px 15px;
     }
-
+    #submit-btn, #back-btn, #clear-btn {
+        padding: 4px 10px;
+    }
 }
