@@ -9,8 +9,15 @@ body,html {
     flex-wrap: wrap;
 }
 
+main{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+}
+
+/* Header */
 header {
-    background-color: lightgrey;
     line-height: 50px;
     margin: 35px;
     font-size: var(--font-large);
@@ -19,6 +26,13 @@ header {
 .view-high-score {
     display: inline;
     color: var(--primary-color);
+    font-size: var(--font-large);
+    background: none;
+    border: none;
+    padding: 0;
+    font: inherit;
+    cursor: pointer;
+    outline: inherit;
 }
 
 .timer-countdown {
@@ -27,18 +41,20 @@ header {
     margin-right: 20px;
 }
 
+/* Code quiz containers */
 #intro-page, #quiz-container, #result, #high-score{
     display: block;
     margin: 70px auto;
     text-align: center;
     width: 700px;
-    background-color: lightgrey;
     flex: wrap;
 }
 
 .hidden {
     display: none !important;
 }
+
+
 .titles {
     margin: 10px;
     padding: 20px;
@@ -47,6 +63,7 @@ header {
 .instructions {
     margin: 10px;
     padding: 10px;
+    font-size: 20px;
 }
 
 .button {
@@ -54,9 +71,9 @@ header {
     margin-bottom: 15px;
     background-color: var(--primary-color);
     border: none; 
-    border-radius: 15px;  
+    border-radius: 5px;  
     color: white;
-    padding: 15px 35px;
+    padding: 7px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
@@ -64,6 +81,7 @@ header {
     transition-duration: 0.4s;
     font-size: var(--font-medium);
     font-family: var(--font-family);
+    width:200px;
 }
 
 .button:hover {
@@ -88,6 +106,7 @@ header {
     text-align: left;
 }
 
+/* Choices button */
 #answer-0, #answer-1, #answer-2, #answer-3 {
     display: block;
     width: 185px;
@@ -95,29 +114,47 @@ header {
     font-family: var(--font-family);
 }
 
+/* Answer checker */
 .answer-check p {
     margin: 5px;
     padding: 15px;
-    border-top: 1px solid grey;
+    border-top: 1px solid #CCC;
     font-size: var(--font-large);
+    font-style: italic;
+    color: #999;
 }
 
 .display-final-score, .input-initials {
     text-align: left;
     margin-left: 30px;
 }
+
+/* Input page */
 #initials {
     width: 300px;
+    border: 1px solid #000;
     font-size: var(--font-medium);
     font-family: var(--font-family);
-}
-.saved-initial-score {
-    text-align: left;
-}
-#submit-btn, #back-btn, #clear-btn {
-    padding: 8px 25px;
+    padding: 5px;
+    border-radius: 5px;
+    margin-right: 10px;;
 }
 
+/* Highscore page */
+.saved-initial-score ol {
+    text-align: left;
+    padding: 25px;
+    margin: 20px;
+}
+
+#all-time-high-scores {
+    text-align: initial;
+}
+#submit-btn, #back-btn, #clear-btn {
+    padding: 7px;
+}
+
+/* Responsive */
 @media (max-width: 680px) {
     header {
         width: 100%;
@@ -128,6 +165,7 @@ header {
 
     .view-high-score {
         display: inline;
+        margin-left: 20px;
     }
     
     .timer-countdown {

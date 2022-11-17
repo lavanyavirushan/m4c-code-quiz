@@ -1,25 +1,8 @@
-/*Acceptance Criteria 
-GIVEN I am taking a code quiz
-WHEN I click the start button
-THEN a timer starts and I am presented with a question
-WHEN I answer a question
-THEN I am presented with another question
-WHEN I answer a question incorrectly
-THEN time is subtracted from the clock
-WHEN all questions are answered or the timer reaches 0
-THEN the game is over
-WHEN the game is over
-THEN I can save my initials and score */ 
-
 const quizContainerEL = document.querySelector("#quiz-container")
-var questiontitle = document.querySelector(".questions"); 
-var answer0 = document.getElementById("answer-0"); 
-var answer1 = document.getElementById("answer-1");
-var answer2 = document.getElementById("answer-2");
-var answer3 = document.getElementById("answer-3");
-var answerCheck = document.querySelector(".answer-check p");
-var timerEL = document.querySelector(".timer-countdown span"); 
-var startBtn = document.querySelector("#start-btn"); 
+const questionTitle = document.querySelector(".questions"); 
+const answerCheck = document.querySelector(".answer-check p");
+const timerEL = document.querySelector(".timer-countdown span"); 
+const startBtn = document.querySelector("#start-btn"); 
 const introPage = document.querySelector("#intro-page");
 const result = document.querySelector("#result");
 const highScorePage = document.querySelector("#high-score");
@@ -28,14 +11,18 @@ const submitBtn = document.querySelector("#submit-btn");
 const backBtn = document.querySelector("#back-btn");
 const clearBtn = document.querySelector("#clear-btn"); 
 const choicesEl = document.querySelectorAll(".choices ul li");
+const displayFinalScore = document.querySelector(".display-final-score span");
+const inputInitials = document.querySelector("#initials");
+const allHighScores = document.querySelector("#all-time-high-scores");
+const viewHighScoreBtn = document.querySelector(".view-high-score");
 
-let timerCount = 75; 
+let timerCount;
+let score = 0;  
 let interval;
 
-
 let questionIndex = 0;
-// let choiceIndex = 0; 
-// Quiz questions, options and answers 
+
+// Array of Quiz questions, choices and answers 
 const quizQuestions = [
     {
         questions: "Commonly used data types DO NOT include:", 
@@ -50,7 +37,7 @@ const quizQuestions = [
     {
         questions: "Arrays in JavaScript can be used to store __________.", 
         choices: ["1.  Numbers and strings", "2. Other arrays", "3. Booleans", "4. All of the above"], 
-        answer: 1
+        answer: 3
     }, 
     {
         questions: "String values must be enclosed within __________ when being assigned to variables.", 
@@ -64,98 +51,170 @@ const quizQuestions = [
     }
 ];
 
-// let answerChoices = quizQuestions[questionIndex].choices;
-// console.log(answerChoices);
+// Timer Countdown
+function timerCountdown(descreaseByValue){
+    if(timerCount > 0 && timerCount > descreaseByValue) {
+        timerCount = timerCount - descreaseByValue; 
+        updateTimerUI(timerCount);
+    }else{
+        timerCount = 0
+        clearInterval(interval);
+        updateTimerUI(timerCount);
+        updateQuizResultUI(score);
+    }
+}
 
+// Hide intro, build quiz, starts the quiz timer 
 function startQuiz(){
-    // Update UI to hide intro-pag box 
-    introPage.classList.add("hidden");
-    // show buildQuiz box 
-    quizContainerEL.classList.remove("hidden");
-    // buildQuiz question 
-    buildQuiz();
-    // start timer
-    interval = setInterval(timerCountdown,1000);
-    
-}
-// update questions
-function buildQuiz(){
-    // Question1 and choices
-    questiontitle.innerText = quizQuestions[questionIndex]["questions"]; 
-
-    // answer0.innerText = quizQuestions[questionIndex]["choices"][0];
-    // answer1.innerText = quizQuestions[questionIndex].choices[1];
-    // answer2.innerText = quizQuestions[questionIndex].choices[2];
-    // answer3.innerText = quizQuestions[questionIndex].choices[3];
-
-    for(let answerChoices = 0; answerChoices <= quizQuestions[questionIndex.choices]; answerChoices++){
-        
-        console.log (answerChoices); 
-    
-    }
-
+    timerCount = 75;
+    buildQuiz(quizQuestions[questionIndex]);
+    updateStartQuizUI();
+    updateTimerUI(timerCount);
+    interval = setInterval(timerCountdown.bind(this, 1),1000);
 }
 
+// Quiz page 
+/**
+ * Builds UI with Questions and Choices of answers
+ * @param {question: "", choices: [], answer: 3} quizObject 
+ */
+function buildQuiz(quizObject){
+    questionTitle.innerText = quizObject.questions; 
+    choicesEl.forEach(function(element, index){
+        element.innerText = quizObject.choices[index];
+    })
+}
 
-function checkAnswer(){
-
-    if (quizQuestions[questionIndex].choices[quizQuestions[questionIndex].answer] == this.innerText) {
-        answerCheck.innerText = "correct";
+// Check user answer, calculate score and reduce timer
+function checkAnswer(userAnswer){
+    let isCorrect;
+    if (quizQuestions[questionIndex].choices[quizQuestions[questionIndex].answer] == userAnswer) {
+        isCorrect = true;
+        score += 20
     } else {
-        answerCheck.innerText = "wrong";       
+        isCorrect = false;
+        timerCountdown(10)
+        updateTimerUI(timerCount);
     }
+    updateAnswerUI(isCorrect);
+}
 
+// Display next question once answer check is done
+function dispatchNextQuestion(){
+    let userAnswer = this.innerText
+    checkAnswer(userAnswer);
     if(questionIndex < quizQuestions.length-1)  {
         questionIndex += 1;
-        console.log(quizQuestions.length);
-        buildQuiz();
-
+        buildQuiz(quizQuestions[questionIndex]);
     } else {
-        quizContainerEL.classList.add("hidden");
-        result.classList.remove("hidden");
+        clearInterval(interval);
+        updateQuizResultUI(score)
     }
-   
 }
 
-function submitAnswer(){
-    //what do you have to do when they click submit? 
-    
-    console.log("answer submit")
+// Collect userinput and store in local
+function submitHighScore(){
+    let yourScore = {
+        initial: inputInitials.value,
+        score: score
+    };
+    let previousScores = JSON.parse(localStorage.getItem("finalScores"));
+
+    if(previousScores == null){
+        previousScores = [];
+    }
+    previousScores.push(yourScore)
+    localStorage.setItem("finalScores", JSON.stringify(previousScores))
+    showHighScoreBoxUI(previousScores);
+}
+
+// Display highscore, pull from storage
+function viewHighScore(){
+    let previousScores = JSON.parse(localStorage.getItem("finalScores"));
+    showHighScoreBoxUI(previousScores);
+    clearInterval(interval);
+    resetVaribles();
+}
+
+// clear highscore
+function clearHighScore(){
+    localStorage.removeItem("finalScores");
+    allHighScores.innerHTML = ""; 
+}
+
+// reset to start page
+function goBack(){
+    resetVaribles();
+    goBackToStartBoxUI();
+}
+
+// reset values
+function resetVaribles(){
+    questionIndex = 0;
+    score = 0;
+    timerCount = 0;
+}
+
+// user choice for answer
+choicesEl.forEach(function(element,index){
+    element.addEventListener("click", dispatchNextQuestion); 
+}) 
+
+// click listener
+startBtn.addEventListener("click",startQuiz);
+submitBtn.addEventListener("click",submitHighScore);
+backBtn.addEventListener("click", goBack);
+clearBtn.addEventListener("click", clearHighScore);
+viewHighScoreBtn.addEventListener("click", viewHighScore)
+
+
+
+
+
+// All UI Element Updates happens here
+ 
+function updateStartQuizUI(){
+    introPage.classList.add("hidden");
+    quizContainerEL.classList.remove("hidden");
+}
+
+function updateTimerUI(timer){
+    timerEL.innerText = timer
+}
+
+function updateAnswerUI(isCorrect){
+    if(isCorrect){
+        answerCheck.innerText = "Correct";
+    }else{
+        answerCheck.innerText = "Wrong";
+    }
+}
+
+function updateQuizResultUI(score){
+    displayFinalScore.innerText = score; 
+    quizContainerEL.classList.add("hidden");
+    result.classList.remove("hidden");
+}
+
+/**
+ * 
+ * @param [{}] allScores 
+ */
+function showHighScoreBoxUI(allScores){
+
+    if(allScores.length > 0){
+       allHighScores.innerHTML = (allScores.map(previousScore => `<li>${previousScore.initial} - ${previousScore.score}</li>`)).join('')
+    }
+    introPage.classList.add("hidden");
+    quizContainerEL.classList.add("hidden");
     result.classList.add("hidden");
     highScorePage.classList.remove("hidden");
-
 }
 
-function goBack(){
+function goBackToStartBoxUI(){
     highScorePage.classList.add("hidden");
     introPage.classList.remove("hidden");
-    questionIndex = 0;
     answerCheck.innerText = "";
-
+    inputInitials.value = "";
+    updateTimerUI(0);
 }
-
-// console.log(choicesEl);
-
-for (var answers = 0; answers < choicesEl.length; answers++) {
-    choicesEl[answers].addEventListener("click",checkAnswer);
-} 
-
-startBtn.addEventListener("click",startQuiz);
-submitBtn.addEventListener("click",submitAnswer);
-backBtn.addEventListener("click", goBack);
-
-function timerCountdown(){
-    if(timerCount > 0) {
-        timerCount = timerCount - 1; 
-        timerEL.innerText = timerCount
-    }else{
-        clearInterval(interval);
-    }
-}
-
-
-// answer0.addEventListener("click",checkAnswer); 
-// answer1.addEventListener("click",checkAnswer); 
-// answer2.addEventListener("click",checkAnswer); 
-// answer3.addEventListener("click",checkAnswer); 
-

@@ -12,14 +12,14 @@
       rel="stylesheet"
       href="https://fonts.googleapis.com/css?family=Sofia"
     />
-    <link rel=""stylesheet type="text/css" href="./assets/css/reset.css">
+    <link rel="" stylesheet type="text/css" href="./assets/css/reset.css" />
     <link rel="stylesheet" type="text/css" href="./assets/css/style.css" />
   </head>
 
   <body>
     <!-- Stores Highscore and displays countdown timer -->
     <header>
-      <div class="view-high-score" href="#high-score">View high score</div>
+      <button class="view-high-score">View high score</button>
       <div class="timer-countdown">Time: <span>0</span></div>
     </header>
 
@@ -37,7 +37,7 @@
 
       <!-- Quiz Questions and options -->
       <section id="quiz-container" class="hidden">
-          <div class="questions">Question:</div>
+        <div class="questions">Question:</div>
         <div class="choices">
           <ul>
             <li class="button" id="answer-0"></li>
@@ -55,20 +55,25 @@
       <!-- Results container -->
       <section id="result" class="hidden">
         <div class="left-title">All Done!</div>
-        <p class="display-final-score">Your final score is: ---</p>
+        <p class="display-final-score">Your final score is: <span></span></p>
         <div class="input-initials">
-            <label for="initials">Enter initials:<label>
-            <input type="text" name="initials" id="initials"/>
-            <button class="button" id="submit-btn">Submit</button>
+          <input
+            type="text"
+            name="initials"
+            id="initials"
+            placeholder="Enter initials:"
+          />
+          <button class="button" id="submit-btn">Submit</button>
         </div>
       </section>
 
       <!-- Display high score  -->
       <section id="high-score" class="hidden">
         <div class="left-title">High Score</div>
-        <p id="saved-initial-score">SCORE GOES HERE</p>
-        <button class= "button" id="back-btn">Go Back</button>
-        <button class= "button" id="clear-btn">Clear high score</button>
+        <!-- <p id="saved-initial-score">SCORE GOES HERE</p> -->
+        <ol id="all-time-high-scores"></ol>
+        <button class="button" id="back-btn">Go Back</button>
+        <button class="button" id="clear-btn">Clear high score</button>
       </section>
     </main>
 
