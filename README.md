@@ -2,7 +2,7 @@
 
 ## Description
 
-This week we built a timed coding quize with mutliple-choice questions. This app runs in the browser which allows user to take part in answering 5 questions within a time frame. For each incorrect answer, the time will be subtracted from the clock. When all the questions are answered or when the timer reaches 0, then the quiz will end allowing the user to input their initials and view their final quiz score.
+This week we built a timed coding quize with mutliple-choice questions. This app runs in the browser which allows user to take part in answering 5 questions within a time frame. For each incorrect answer, the time will be subtracted from the clock, for each correct answer a score of 20 will be calculated. When all the questions are answered or when the timer reaches 0, then the quiz will end allowing the user to input their initials and view their final quiz score. They may try the quiz again by clicking the back button, or view their highscore on the top left corner. If they would like to clear their previous score, they may clear it using the clear high score button.
 
 ## Usage
 
@@ -18,10 +18,11 @@ To get familiar with completing coding assessment as well as to familiarize with
 
 ## Screenshot of the site
 
-![Screenshot]()
-![Screenshot]()
-![Screenshot]()
-![Screenshot]()
+![Screenshot](./assets/README-images/quiz-intro-page.png)
+![Screenshot](./assets/README-images/quiz-question-page.png)
+![Screenshot](./assets/README-images/responsive-quiz.png)
+![Screenshot](./assets/README-images/responsive-2-input-field.png)
+![Screenshot](./assets/README-images/high-score-page.png)
 
 ## License
 
