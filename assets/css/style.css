@@ -27,7 +27,7 @@ header {
     margin-right: 20px;
 }
 
-#intro-page, #quiz-questions, #result, #high-score{
+#intro-page, #quiz-container, #result, #high-score{
     display: block;
     margin: 70px auto;
     text-align: center;
@@ -36,6 +36,9 @@ header {
     flex: wrap;
 }
 
+.hidden {
+    display: none !important;
+}
 .titles {
     margin: 10px;
     padding: 20px;
@@ -75,19 +78,19 @@ header {
     margin: 10px;
 }
 
-.options ul {
+.choices ul {
     list-style-type: none;
     margin: 0;
     padding: 0;
 }
 
-.options ul li {
+.choices ul li {
     text-align: left;
 }
 
-#answer-1, #answer-2, #answer-3, #answer-4 {
+#answer-0, #answer-1, #answer-2, #answer-3 {
     display: block;
-    width: 150px;
+    width: 185px;
     margin-left: 30px;
     font-family: var(--font-family);
 }
@@ -96,6 +99,7 @@ header {
     margin: 5px;
     padding: 15px;
     border-top: 1px solid grey;
+    font-size: var(--font-large);
 }
 
 .display-final-score, .input-initials {
@@ -130,7 +134,7 @@ header {
         margin-top: 5px;
     }
 
-    #intro-page, #quiz-questions, #result, #high-score{
+    #intro-page, #quiz-container, #result, #high-score{
         width: 100%;
     }
 }

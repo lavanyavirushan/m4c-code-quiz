@@ -20,7 +20,7 @@
     <!-- Stores Highscore and displays countdown timer -->
     <header>
       <div class="view-high-score" href="#high-score">View high score</div>
-      <div class="timer-countdown">Time: 0</div>
+      <div class="timer-countdown">Time: <span>0</span></div>
     </header>
 
     <main>
@@ -36,25 +36,25 @@
       </section>
 
       <!-- Quiz Questions and options -->
-      <section id="quiz-questions">
-          <h1 class="questions">Commonly used data types DO NOT include:</h1>
-        <div class="options">
+      <section id="quiz-container" class="hidden">
+          <div class="questions">Question:</div>
+        <div class="choices">
           <ul>
-            <li class="button" id="answer-1">1. Strings</li>
-            <li class="button" id="answer-2">2. Booleans</li>
-            <li class="button" id="answer-4">4. Numbers</li>
-            <li class="button" id="answer-3">3. Alerts</li>
+            <li class="button" id="answer-0"></li>
+            <li class="button" id="answer-1"></li>
+            <li class="button" id="answer-2"></li>
+            <li class="button" id="answer-3"></li>
           </ul>
         </div>
         <!-- Check if answer is correct or wrong -->
         <div class="answer-check">
-          <p>Correct or Wrong</p>
+          <p></p>
         </div>
       </section>
 
       <!-- Results container -->
-      <section id="result">
-        <h1 class="left-title">All Done!</h1>
+      <section id="result" class="hidden">
+        <div class="left-title">All Done!</div>
         <p class="display-final-score">Your final score is: ---</p>
         <div class="input-initials">
             <label for="initials">Enter initials:<label>
@@ -64,8 +64,8 @@
       </section>
 
       <!-- Display high score  -->
-      <section id="high-score">
-        <h1 class="left-title">High Score</h1>
+      <section id="high-score" class="hidden">
+        <div class="left-title">High Score</div>
         <p id="saved-initial-score">SCORE GOES HERE</p>
         <button class= "button" id="back-btn">Go Back</button>
         <button class= "button" id="clear-btn">Clear high score</button>
